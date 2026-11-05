@@ -1,0 +1,5 @@
+.DS_Store
+node_modules/
+# Existing course assets are separate from the handbook website
+/todolist/
+/todolist.zip
