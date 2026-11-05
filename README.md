@@ -1,50 +1,51 @@
-# DevOps for Freshers — Sổ tay tiếng Việt
+# DevOps for Freshers — Ghi chú theo playlist
 
-Website tĩnh bằng HTML/CSS/JavaScript thuần. Có trang bìa, 7 trang mở đầu và 37 bài ghi chú; mỗi bài có khái niệm, lệnh/ví dụ, bài tập, tiêu chí kiểm tra, tài liệu tham khảo và câu hỏi tự kiểm tra có giải thích.
+Website tĩnh HTML/CSS/JavaScript, không cần framework/build/backend.
 
-Nội dung tự biên soạn theo các chủ đề trong đề cương công khai tại https://devopsedu.vn/courses/devops-for-freshers/. Không phải transcript, đáp án bài kiểm tra, video hay tài liệu chính thức của DEVOPSEDU. Chưa truy cập các video/tài liệu yêu cầu đăng nhập. Số bài sổ tay từ 1 đến 37, dòng “Chủ đề … trong khóa gốc” giúp đối chiếu từ bài 0 đến 35, gồm chủ đề 3.1.
+Nguồn khóa học: https://devopsedu.vn/courses/devops-for-freshers/
+Playlist đối chiếu: https://www.youtube.com/playlist?list=PLsvroIvFNP1KU8foUeCC-hbJbqnAggWL2
 
-## Mở website
+## Nội dung bản chỉnh theo video
 
-Có thể mở trực tiếp `index.html`. Để dùng các chức năng trình duyệt như clipboard thuận tiện hơn, chạy:
+- 7 phần: Giới thiệu, Linux, Git, CI/CD, Docker, Jenkins, Monitoring.
+- 37 bài, giữ số bài gốc **0–35 và 3.1**. ID nội bộ dùng lưu tiến độ giữ ổn định.
+- Mỗi bài có tóm tắt, các mốc nội dung liên kết về YouTube, video gốc và phần thực hành bổ sung ghi nhãn riêng.
+- Các bài mở đầu từng phần vẫn giữ.
+- Transcript/phụ đề tự động của cả 37 video đã truy cập để đối chiếu nội dung. Nguồn trả về có cả tiếng Việt và tiếng Anh/phiên bản tự động; trang hiển thị ngôn ngữ đối chiếu ở từng bài.
+- Ghi chú là diễn giải ngắn có chọn lọc, không phải transcript đầy đủ. Chưa kiểm chứng toàn bộ từng thao tác/chữ trên màn hình. Không khẳng định các snippet bổ sung giống từng ký tự file tác giả.
+- Không phân phối raw transcript, video, license key hoặc tài nguyên khóa học yêu cầu đăng nhập. Các lỗi nhận dạng thuật ngữ rõ ràng được chuẩn hóa; mốc xem lại giúp kiểm tra nguyên bản.
+
+Các chi tiết đã chỉnh theo bài: frontend gồm Vue/Nginx và React/systemd; Java backend có MariaDB/import SQL; GitLab CI bài 16 là Shell runner/backend; Dockerfile bài 21 dùng bối cảnh Java 8 và bài 22 minh họa Node 18.18 Alpine; bài 31 có parameter/Active Choices/start-stop-update-rollback; bài 32 là job xem log; bài 35 kiểm tra TCP listen 8080 bằng item/trigger. Những phiên bản xuất hiện trong video không phải đề xuất phiên bản mới nhất.
+
+## Chạy
 
 ```sh
 cd /Users/quyph/Downloads/DevOps_Freshers
 python3 -m http.server 4174 --bind 127.0.0.1
 ```
 
-Mở http://127.0.0.1:4174. Dừng bằng Ctrl+C. Không cần npm install hoặc build. Máy chủ này phục vụ cả nội dung thư mục hiện tại cho máy local; không bind 0.0.0.0 khi chỉ xem trên máy cá nhân.
+Mở http://127.0.0.1:4174. Ctrl+C để dừng. Có thể mở index.html trực tiếp; clipboard/video nhúng tùy chính sách trình duyệt. Nếu iframe YouTube không hoạt động, dùng nút Mở YouTube hoặc các mốc thời gian.
 
-## Các file website
+## Cấu trúc
 
-- `index.html`: khung giao diện.
-- `style.css`: giao diện sách, responsive, sáng/tối, giảm chuyển động.
-- `course.js`: tên, mô tả, nguồn và khóa lưu dữ liệu riêng của khóa học.
-- `content.js`: toàn bộ phần, bài học, lệnh, bài tập và câu hỏi.
-- `app.js`: điều hướng hash, tìm kiếm không dấu, lưu tiến độ, copy lệnh và phản hồi câu hỏi.
-- `.nojekyll`: để GitHub Pages phục vụ website tĩnh.
+- index.html: giao diện.
+- style.css: sách, responsive, sáng/tối.
+- course.js: mô tả, link nguồn và khóa lưu localStorage.
+- content.js: bài học, video ID, mốc thời gian và nội dung tự luyện.
+- app.js: router, mục lục, tìm kiếm không dấu, player, tiến độ và quiz bổ sung.
+- .nojekyll: phục vụ trực tiếp trên GitHub Pages.
 
-`#/` là trang bìa, `#/phan/1` là mở đầu phần, `#/bai/1` là bài đầu. Phím ←/→ chuyển trang khi không nhập liệu. Tiến độ được đánh dấu chủ động và lưu localStorage, riêng với sổ tay CKA; không đồng bộ giữa trình duyệt/máy. Câu hỏi tự kiểm tra không chấm chứng chỉ và không lưu điểm. Sáng/tối, cỡ chữ, hiệu ứng và vị trí gần nhất cũng được lưu trên trình duyệt.
+Route mới khớp số bài gốc: `#/bai/0`, `#/bai/3.1`, `#/bai/35`. `#/phan/1` vẫn là mở đầu. Bookmark dạng số bài của bản cũ 1–37 không còn tương ứng nội dung cũ; vị trí đọc đã lưu trong localStorage được chuyển đổi một lần khi nâng từ bản trước. Tiến độ hoàn thành dùng ID nội bộ không đổi. Dữ liệu chỉ lưu trên trình duyệt, không đồng bộ giữa thiết bị; kết quả quiz không được lưu.
 
-Các thư mục/file có sẵn `todolist/`, `todolist.zip` được giữ nguyên. Sổ tay không chạy hay sửa dự án Vue này. Một số bài dùng nó làm tình huống học; Vue CLI/dependency cũ cần được đánh giá tương thích riêng trước khi build. Chưa cài công cụ DevOps hay chạy các lệnh lab trên máy của bạn.
+## Cập nhật GitHub Pages
 
-## Đưa lên GitHub Pages
-
-Tạo repo trống, ví dụ `devops-freshers`. Chỉ đưa các file website và README vào repo; không đưa nguyên `todolist/` hoặc `.git` của dự án khác vào. Từ thư mục này có thể chạy sau khi đã xác định đúng repo Git:
+Bản này chưa tự push. Tại repo đã cấu hình đúng remote:
 
 ```sh
-git init
-git add index.html style.css course.js content.js app.js .nojekyll README.md
-git commit -m "Publish DevOps for Freshers handbook"
-git branch -M main
-git remote add origin https://github.com/<username>/devops-freshers.git
-git push -u origin main
+git status
+git add index.html style.css course.js content.js app.js README.md
+git commit -m "Align handbook with original DevOps video lessons"
+git push origin main
 ```
 
-Settings → Pages → Deploy from a branch → main → / (root) → Save. Nếu origin đã tồn tại thì kiểm tra `git remote -v`, không thêm origin lần hai. GitHub Pages sẽ công khai website; bản này chưa được tự động upload lên GitHub hay Sites.
-
-## Chỉnh sửa nội dung
-
-Sửa `CHAPTERS` trong content.js. Mỗi bài có id, chapter, ref, title, text, points, code, exercise, verify, warning, source và quiz. Giữ nguyên id để không làm thay đổi bookmark/tiến độ đã có. `quiz.correct` là chỉ số đáp án bắt đầu từ 0.
-
-Ví dụ trong bài học chỉ là hướng dẫn, một số đoạn cần điền thông tin và ghép vào cấu hình hiện có. Các lệnh Linux dành cho Ubuntu lab; không chạy trực tiếp trên macOS nếu không tương thích. GitLab/Jenkins/Harbor/Zabbix cần máy chủ và cấu hình riêng. Những phép kiểm tra UI của sổ tay không xác nhận các lệnh triển khai đã chạy trên một hạ tầng thực tế.
+Giữ Settings → Pages → main → / (root). Chỉ thêm file website, tránh thêm .git của thư mục con hay tài nguyên lab. Không thay cấu hình tài khoản Git, remote, credential, history hoặc push tự động trong lần cập nhật source này.
